@@ -6,8 +6,11 @@ import Memento.*;
 import Observer.*;
 import State.*;
 import Strategy.*;
+import TemplateMethod.*;
+import Visitor.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -166,6 +169,29 @@ public class Main {
         alumnoStrategy.mostrarNotaFinal(Arrays.asList(8, 7, 9)); // Usa ExamenExtra
 
 
+        //Ejercicio 9
+        System.out.println("**************Template Method**************");
+        ReporteAcademico reporteCurso = new ReporteCurso("Analisis Matematico", 7.5);
+        System.out.println("--REPORTE DEL CURSO--");
+        reporteCurso.generarReporte();
+        ReporteAcademico reporteAlumno = new ReporteAlumno("Juan Pérez", "Matemáticas Avanzadas", 9.0);
+        System.out.println("\n--- REPORTE DE ALUMNO ---");
+        reporteAlumno.generarReporte();
+
+
+
+        //Ejercicio 10
+        System.out.println("**************Visitor**************");
+
+        AlumnoRegular alumnoRegular = new AlumnoRegular("Juan Pérez", 5000);
+        AlumnoBecado alumnoBecado = new AlumnoBecado("María Gómez", 5000, 50);
+
+        List<AlumnoVisitor> alumnos = Arrays.asList(alumnoRegular, alumnoBecado);
+
+        Visitor aplicarBeca = new AplicarBeca();
+
+        System.out.println("--- APLICANDO BECAS Y DESCUENTOS ---");
+        alumnos.forEach(a -> a.aceptar(aplicarBeca));
 
 
     }
